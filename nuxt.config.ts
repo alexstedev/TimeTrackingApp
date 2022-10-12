@@ -68,7 +68,7 @@ export default defineNuxtConfig({
   */
   head: {
     titleTemplate: '%s',
-    title: 'AnotherPomodoro',
+    title: 'TimeTrackingApp',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' },
@@ -147,9 +147,7 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       { code: 'en', name: 'English', iso: 'en-US', file: 'en.json' },
-      { code: 'hu', name: 'Magyar', iso: 'hu-HU', file: 'hu.json' },
-      { code: 'hr', name: 'Hrvatski', iso: 'hr-HR', file: 'hr.json' },
-      { code: 'fr', name: 'Français', iso: 'fr-FR', file: 'fr.json' }
+      { code: 'es', name: 'Español', iso: 'es-ES', file: 'es.json' },
     ],
     defaultLocale: 'en',
     lazy: true,
