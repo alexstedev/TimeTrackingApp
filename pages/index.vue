@@ -32,7 +32,7 @@
               <!-- App name and slogan -->
               <div class="flex flex-col">
                 <h1 class="text-3xl font-bold md:text-5xl">
-                  AnotherPomodoro
+                  TimeTrackingApp
                 </h1>
                 <div class="text-lg md:text-xl" v-text="$t('index.app_description')" />
               </div>
@@ -67,10 +67,10 @@
           <div class="flex flex-row mb-4 space-x-2">
             <SupportButton :aria-label="$t('index.alt.links.source')" icon-size="28" type="github" :show-text="false"
               :default-colours="false" class="p-2 text-gray-100 bg-black hover:bg-gray-800 active:bg-gray-900"
-              utm-tags="?utm_source=AnotherPomodoro&utm_medium=web&utm_content=home" tabindex="0" />
+              utm-tags="?utm_source=TimeTrackingApp&utm_medium=web&utm_content=home" tabindex="0" />
             <SupportButton :aria-label="$t('index.alt.links.support')" icon-size="28" type="support" :show-text="false"
               :default-colours="false" class="p-2 text-gray-100 bg-black hover:bg-gray-800 active:bg-gray-900"
-              utm-tags="?utm_source=AnotherPomodoro&utm_medium=web&utm_content=home" tabindex="0" />
+              utm-tags="?utm_source=TimeTrackingApp&utm_medium=web&utm_content=home" tabindex="0" />
           </div>
           <!-- Scroll indicator -->
           <ScrollIcon size="42" />
@@ -83,7 +83,7 @@
       <div class="flex flex-col items-center text-sky-900">
         <h2 class="text-5xl font-bold tracking-tight uppercase" v-text="$t('index.section_whatitdoes.title')" />
         <div class="mt-2 text-lg text-center xl:text-xl">
-          <p v-text="$t('index.section_whatitdoes.subtitle.main', { appname: 'AnotherPomodoro' })" />
+          <p v-text="$t('index.section_whatitdoes.subtitle.main', { appname: 'TimeTrackingApp' })" />
           <p v-text="$t('index.section_whatitdoes.subtitle.sub')" />
         </div>
 
@@ -136,65 +136,6 @@
       </div>
     </Section>
 
-    <!-- Section 4: FAQ -->
-    <Section ref="section-4"
-      class="flex flex-col items-center justify-center overflow-hidden text-center bg-amber-300 py-36">
-      <h2 class="text-5xl font-bold tracking-tight text-black uppercase" v-text="$t('index.faq.title')" />
-
-      <div class="mt-8 px-4 w-full xl:w-[1280px] text-left flex flex-col space-y-2">
-        <details v-for="(question, i) in faq" :key="'faq-' + i"
-          class="w-full p-4 text-gray-700 transition bg-gray-100 rounded-lg open:bg-gray-50 ring-1 ring-transparent open:ring-gray-400 shadow-slate-400/30 open:shadow-lg open:text-gray-900"
-          :open="openfaq === i" @click.prevent="openfaq = i">
-          <summary class="font-bold cursor-pointer" v-text="$t('index.faq.accordion.' + question.q +'.q')" />
-          <div class="mt-2" v-text="$t('index.faq.accordion.' + question.q + '.a')" />
-          <div v-if="question.hint" class="mt-2">
-            <span class="px-2 py-1 font-bold text-gray-900 rounded-lg bg-amber-400" v-text="$t('index.faq.hint')" />
-            {{ $t('index.faq.accordion.' + question.q + '.hint') }}
-          </div>
-        </details>
-      </div>
-    </Section>
-
-    <!-- Section 5: Support -->
-    <Section ref="section-5"
-      class="flex flex-col items-center justify-start px-4 overflow-hidden text-center md:justify-center bg-stone-100 py-36">
-      <h2 class="text-5xl font-bold leading-tight tracking-tight text-black uppercase"
-        v-text="$t('index.support.title')" />
-      <div class="flex flex-col mt-4 space-y-1">
-        <p v-text="$t('index.support.subtitle.main')" />
-        <p v-text="$t('index.support.subtitle.action')" />
-      </div>
-      <div class="flex flex-row mt-8 space-x-2">
-        <SupportButton type="github" default-classes />
-        <SupportButton type="support" default-classes />
-      </div>
-      <!-- Share links -->
-      <div class="my-3" v-text="$t('settings.about.share')" />
-      <div class="flex flex-row items-center space-x-2 text-sm">
-        <a :aria-label="$t('index.alt.links.share.twitter')"
-          href="https://twitter.com/AnotherPomodoro?utm_source=AnotherPomodoro&utm_medium=web&utm_content=home"
-          class="rounded-full w-12 h-12 bg-[#1da1f2] text-white flex flex-row items-center justify-center space-x-1 transition-colors">
-          <AboutTwitter size="24" />
-        </a>
-        <a :aria-label="$t('index.alt.links.share.facebook')"
-          href="http://www.facebook.com/share.php?u=https://time-tracking.netlify.app"
-          class="rounded-full w-12 h-12 bg-[#1877f2] text-white flex flex-row items-center justify-center space-x-1 transition-colors">
-          <AboutFacebook size="24" class="translate-x-[-1px]" />
-        </a>
-        <a :aria-label="$t('index.alt.links.share.reddit')"
-          href="https://reddit.com/submit?url=https://time-tracking.netlify.app"
-          class="rounded-full w-12 h-12 bg-[#ff4500] text-white flex flex-row items-center justify-center space-x-1 transition-colors">
-          <AboutReddit size="24" />
-        </a>
-      </div>
-
-      <template #after>
-        <div class="flex flex-col items-center justify-end mt-32">
-          <div class="" v-text="$t('index.support.credits')" />
-          <div class="px-2 py-1 mt-1 bg-gray-800 rounded-lg select-none text-gray-50" v-text="version" />
-        </div>
-      </template>
-    </Section>
   </div>
 </template>
 
@@ -250,7 +191,7 @@ export default {
 
   head() {
     return {
-      title: 'AnotherPomodoro',
+      title: 'TimeTrackingApp',
       link: [
         { rel: 'icon', href: '/favicon.svg' }
       ]
