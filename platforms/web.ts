@@ -6,7 +6,7 @@ import { useSchedule } from '~~/stores/schedule'
 import { useNotifications } from '~~/stores/notifications'
 import { EventType, useEvents } from '~~/stores/events'
 
-export function useWeb () {
+export function useWeb() {
   const settingsStore = useSettings()
   const scheduleStore = useSchedule()
   const notificationsStore = useNotifications()
@@ -142,7 +142,7 @@ export function useWeb () {
 
     // TODO Firefox does not support actions
     if (window.Notification.permission !== 'granted' || settingsStore.permissions.notifications !== true) { return }
-    const notificationActions : NotificationAction[] = []
+    const notificationActions: NotificationAction[] = []
     if (nextState === 'work') {
       notificationActions.push({
         action: 'ready',
@@ -152,7 +152,7 @@ export function useWeb () {
 
     try {
       new Notification(i18n.t('notification.' + nextState + '.title'), {
-        tag: 'AnotherPomodoro-SectionNotify',
+        tag: 'TimeTrackingApp-SectionNotify',
         body: i18n.t('notification.' + nextState + '.body'),
         actions: notificationActions
       })

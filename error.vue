@@ -8,7 +8,9 @@
     <!-- Error description -->
     <div class="max-w-screen-lg mt-8 overflow-hidden border-2 border-gray-300 rounded-lg">
       <transition name="showerror-transition" mode="out-in">
-        <div v-if="!showError" class="flex flex-row items-center p-4 space-x-4 text-gray-100 transition bg-gray-700 cursor-pointer hover:bg-gray-600 active:bg-gray-800" role="button" @click="showError = true">
+        <div v-if="!showError"
+          class="flex flex-row items-center p-4 space-x-4 text-gray-100 transition bg-gray-700 cursor-pointer hover:bg-gray-600 active:bg-gray-800"
+          role="button" @click="showError = true">
           <IconShowError size="42" />
           <div>
             <div class="font-bold" v-text="$t('errorpage.showError.main')" />
@@ -32,18 +34,6 @@
       <ActionButton v-bind="getRowAndState('home')" class="text-emerald-500" text-colours href="/">
         <IconHome />
         <div v-text="$t('errorpage.action.home')" />
-      </ActionButton>
-      <ActionButton v-bind="getRowAndState('githubIssue')" class="text-gray-400" text-colours href="https://github.com/Hanziness/AnotherPomodoro/issues?utm_source=AnotherPomodor&utm_medium=web&utm_content=error">
-        <IconGithub />
-        <div v-text="$t('errorpage.action.githubIssue')" />
-      </ActionButton>
-      <ActionButton v-bind="getRowAndState('githubDiscussion')" class="text-gray-400" text-colours href="https://github.com/Hanziness/AnotherPomodoro/discussions?utm_source=AnotherPomodor&utm_medium=web&utm_content=error">
-        <IconDiscussion />
-        <div v-text="$t('errorpage.action.githubDiscussion')" />
-      </ActionButton>
-      <ActionButton v-bind="getRowAndState('twitter')" class="text-[#1da1f2]" text-colours href="https://twitter.com/AnotherPomodoro?utm_source=AnotherPomodor&utm_medium=web&utm_content=error">
-        <IconTwitter />
-        <div v-text="$t('errorpage.action.twitter')" />
       </ActionButton>
     </ActionBar>
   </div>
@@ -118,13 +108,13 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       showError: false
     }
   },
 
-  head () {
+  head() {
     return {
       title: this.errorHeading.title
     }
@@ -132,7 +122,7 @@ export default {
 
   computed: {
     /** Determines what type of error happened */
-    errorType () {
+    errorType() {
       if (this.error.statusCode >= 500) { return 'crash' }
       if (this.error.statusCode === 404) { return 'notfound' }
       return 'other'
@@ -143,7 +133,7 @@ export default {
      * but on an app error (eg. "crash" because of a store error) it would show
      * "Oops, the app crashed". Can return the icon as well.
      */
-    errorHeading () {
+    errorHeading() {
       let icon = 'IconOtherError'
 
       if (this.errorType === 'crash') {
@@ -162,11 +152,11 @@ export default {
      * For example if it's a 404 error, go to home or the
      * discussion button is recommended but the reset button is hidden.
      */
-    recommendedActions () {
+    recommendedActions() {
       return actions[this.errorType]
     },
 
-    fullError () {
+    fullError() {
       return Object.assign({}, this.error, { route: this.$route })
     }
   },
@@ -174,7 +164,7 @@ export default {
   methods: {
     ...mapActions(useSettings, ['setReset']),
 
-    getRowAndState (action) {
+    getRowAndState(action) {
       let row = 'hidden'
       let state = 'disabled'
 
@@ -201,13 +191,13 @@ export default {
     },
 
     /// Ask settings to reset and navigate back to the home page
-    actionReset () {
+    actionReset() {
       this.setReset(true)
       location.assign('/')
     },
 
     /// Reload the current page
-    actionReload () {
+    actionReload() {
       location.reload()
     }
   }

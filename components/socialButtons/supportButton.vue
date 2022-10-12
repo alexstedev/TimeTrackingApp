@@ -1,5 +1,6 @@
 <template>
-  <a :href="config[type].url + utmTags" :class="['rounded-full flex flex-row items-center transition-colors', { 'px-3 py-2 space-x-1': defaultClasses, 'bg-black hover:bg-gray-700 active:bg-gray-800 text-white': defaultColours && type === 'github', 'bg-yellow-300 hover:bg-yellow-200 active:bg-yellow-400 text-black': defaultColours && type === 'support' }]">
+  <a :href="config[type].url + utmTags"
+    :class="['rounded-full flex flex-row items-center transition-colors', { 'px-3 py-2 space-x-1': defaultClasses, 'bg-black hover:bg-gray-700 active:bg-gray-800 text-white': defaultColours && type === 'github', 'bg-yellow-300 hover:bg-yellow-200 active:bg-yellow-400 text-black': defaultColours && type === 'support' }]">
     <component :is="config[type].icon" :size="iconSize" />
     <span v-if="showText" v-text="config[type].text" />
   </a>
@@ -35,25 +36,25 @@ export default {
     },
     utmTags: {
       type: String,
-      default: '?utm_source=AnotherPomodoro&utm_medium=web&utm_content=settings'
+      default: '?utm_source=TimeTrackingApp&utm_medium=web&utm_content=settings'
     },
     iconSize: {
       type: String,
       default: '24'
     }
   },
-  data () {
+  data() {
     return {
       config: {
         github: {
-          url: 'https://www.github.com/Hanziness/AnotherPomodoro',
+          url: 'https://www.github.com/alexstedev/TimeTrackingApp',
           icon: 'GitHub',
           class: 'bg-black hover:bg-gray-700 active:bg-gray-800 text-white',
           darkClass: 'dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-800',
           text: this.$t('settings.about.source')
         },
         support: {
-          url: 'https://www.buymeacoffee.com/imreg',
+          url: 'https://www.example.com',
           icon: 'Coffee',
           class: 'bg-yellow-300 hover:bg-yellow-200 active:bg-yellow-400 text-black',
           darkClass: '',

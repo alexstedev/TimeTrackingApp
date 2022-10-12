@@ -14,7 +14,7 @@ export default {
     ButtonControl
   },
   methods: {
-    downloadSettings () {
+    downloadSettings() {
       const settings = useSettings().$state
       const tasklist = useTasklist().$state
 
@@ -25,7 +25,7 @@ export default {
 
       const downloadElement = document.createElement('a')
       downloadElement.href = `data:text/plain;charset=utf-8,${encodeURIComponent(JSON.stringify(downloadObject))}`
-      downloadElement.download = 'anotherpomodoro-settings.json'
+      downloadElement.download = 'timetrackingapp-settings.json'
       downloadElement.style.display = 'none'
       document.body.appendChild(downloadElement)
       downloadElement.click()
