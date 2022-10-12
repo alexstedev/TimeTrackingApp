@@ -12,18 +12,6 @@ export const languages = {
     name: 'English',
     iso: 'en-US'
   },
-  fr: {
-    name: 'Français',
-    iso: 'fr-FR'
-  },
-  hr: {
-    name: 'Hrvatski',
-    iso: 'hr-HR'
-  },
-  hu: {
-    name: 'Magyar',
-    iso: 'hu-HU'
-  },
   es: {
     name: 'Español',
     iso: 'es-ES'

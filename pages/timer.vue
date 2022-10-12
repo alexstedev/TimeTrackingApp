@@ -1,8 +1,6 @@
 
 <template>
-  <section
-    class="h-full overflow-hidden duration-300 ease-in dark:text-gray-50"
-  >
+  <section class="h-full overflow-hidden duration-300 ease-in dark:text-gray-50">
     <Title>{{ (remainingTimeString ? `(${remainingTimeString}) ` : '') + pageTitle }}</Title>
 
     <!-- Dark mode background override -->
@@ -16,74 +14,49 @@
       <SettingsPanel v-if="showSettings" v-model="showSettings" class="right-0" />
     </Transition>
     <TransitionGroup name="progress-transition" tag="div" :duration="1000">
-      <TimerProgress
-        v-for="(scheduleItem, index) in progressBarSchedules"
-        :key="scheduleItem.id"
-        :colour="scheduleStore.getScheduleColour[index]"
-        :background="index === 0"
-        :time-elapsed="scheduleStore.getCurrentItem.timeElapsed"
-        :time-original="scheduleStore.getCurrentItem.length"
-      />
+      <TimerProgress v-for="(scheduleItem, index) in progressBarSchedules" :key="scheduleItem.id"
+        :colour="scheduleStore.getScheduleColour[index]" :background="index === 0"
+        :time-elapsed="scheduleStore.getCurrentItem.timeElapsed" :time-original="scheduleStore.getCurrentItem.length" />
     </TransitionGroup>
-    <div
-      class="relative flex flex-col items-center justify-center w-full h-full isolate"
-      :style="{
-        'padding-top': `${mobileSettingsStore.padding.top}px`,
-        'padding-bottom': `${mobileSettingsStore.padding.bottom}px`
-      }"
-    >
+    <div class="relative flex flex-col items-center justify-center w-full h-full isolate" :style="{
+      'padding-top': `${mobileSettingsStore.padding.top}px`,
+      'padding-bottom': `${mobileSettingsStore.padding.bottom}px`
+    }">
       <div class="flex flex-row w-full">
-        <div
-          class="flex flex-col overflow-hidden transition-all duration-300 bg-gray-800 shadow-lg md:w-auto"
-          :class="[settingsStore.schedule.visibility.enabled ? 'mt-0 md:mt-3 md:rounded-lg w-full max-w-full mx-auto self-center' : 'ml-auto p-2 rounded-l-lg mt-3']"
-        >
+        <div class="flex flex-col overflow-hidden transition-all duration-300 bg-gray-800 shadow-lg md:w-auto"
+          :class="[settingsStore.schedule.visibility.enabled ? 'mt-0 md:mt-3 md:rounded-lg w-full max-w-full mx-auto self-center' : 'ml-auto p-2 rounded-l-lg mt-3']">
           <div class="flex flex-row gap-3" :class="[settingsStore.schedule.visibility.enabled ? 'px-3' : '']">
             <ScheduleDisplay v-show="settingsStore.schedule.visibility.enabled" class="px-0" />
             <!-- Settings button -->
             <div class="flex items-center flex-column">
-              <Button
-                circle
-                default-style
-                :importance="3"
-                :aria-label="$t('settings.heading')"
-                class="text-gray-200"
-                @click="showSettings = true"
-              >
+              <Button circle default-style :importance="3" :aria-label="$t('settings.heading')" class="text-gray-200"
+                @click="showSettings = true">
                 <CogIcon :aria-label="$t('settings.heading')" />
               </Button>
             </div>
           </div>
-          <div v-if="settingsStore.schedule.visibility.enabled && settingsStore.schedule.visibility.showSectionType" class="py-2 text-center bg-gray-700 select-none text-gray-50">
+          <div v-if="settingsStore.schedule.visibility.enabled && settingsStore.schedule.visibility.showSectionType"
+            class="py-2 text-center bg-gray-700 select-none text-gray-50">
             {{ $t('section.' + scheduleStore.getCurrentItem.type).toLowerCase() }}
           </div>
         </div>
       </div>
-      <TimerSwitch
-        key="timerswitch"
-        :time-elapsed="scheduleStore.getCurrentItem.timeElapsed"
-        :time-original="scheduleStore.getCurrentItem.length"
-        :timer-state="scheduleStore.timerState"
-        :timer-widget="settingsStore.currentTimer"
-        class="flex-grow"
-        @tick="timeString = $event"
-      />
+      <TimerSwitch key="timerswitch" :time-elapsed="scheduleStore.getCurrentItem.timeElapsed"
+        :time-original="scheduleStore.getCurrentItem.length" :timer-state="scheduleStore.timerState"
+        :timer-widget="settingsStore.currentTimer" class="flex-grow" @tick="timeString = $event" />
       <div class="relative flex flex-row items-center justify-center w-full gap-2 mb-4">
         <TimerControls :class="[{ 'pointer-events-none': preview }]" :can-use-keyboard="!preview && !showSettings" />
-        <Button
-          v-if="settingsStore.tasks.enabled"
-          circle
-          :importance="1"
-          class="transition right-5 sm:absolute"
-          bg-class="dark:bg-slate-800 bg-slate-200"
-          inner-class="p-5 dark:text-slate-50"
-          :class="{'scale-0': showTodoManager}"
-          @click="showTodoManager = true"
-        >
+        <Button v-if="settingsStore.tasks.enabled" circle :importance="1" class="transition right-5 sm:absolute"
+          bg-class="dark:bg-slate-800 bg-slate-200" inner-class="p-5 dark:text-slate-50"
+          :class="{'scale-0': showTodoManager}" @click="showTodoManager = true">
           <ListCheckIcon />
         </Button>
       </div>
-      <transition enter-from-class="translate-y-full" enter-active-class="duration-300 ease-out" leave-to-class="translate-y-full" leave-active-class="duration-150 ease-in">
-        <todo-list v-if="settingsStore.tasks.enabled && showTodoManager" class="fixed bottom-0 z-10 w-full max-w-lg transition-all rounded-t-xl xl:right-4 xl:pb-8" :editing="[0].includes(scheduleStore.timerState)" @hide="showTodoManager = false" />
+      <transition enter-from-class="translate-y-full" enter-active-class="duration-300 ease-out"
+        leave-to-class="translate-y-full" leave-active-class="duration-150 ease-in">
+        <todo-list v-if="settingsStore.tasks.enabled && showTodoManager"
+          class="fixed bottom-0 z-10 w-full max-w-lg transition-all rounded-t-xl xl:right-4 xl:pb-8"
+          :editing="[0].includes(scheduleStore.timerState)" @hide="showTodoManager = false" />
       </transition>
     </div>
     <client-only>
@@ -138,7 +111,7 @@ export default {
     }
   },
 
-  setup () {
+  setup() {
     definePageMeta({ layout: 'timer', layoutTransition: false })
     const mobileSettingsStore = useMobileSettings()
 
@@ -185,7 +158,7 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       showSettings: false,
       showTodoManager: false,
@@ -194,7 +167,7 @@ export default {
   },
 
   computed: {
-    currentColour () {
+    currentColour() {
       const currentState = this.scheduleStore.items[0]?.type
       if (currentState) {
         return this.settingsStore.getColor(currentState)
@@ -203,7 +176,7 @@ export default {
       }
     },
 
-    remainingTimeString () {
+    remainingTimeString() {
       if (this.scheduleStore.getCurrentTimerState === 3) {
         return this.settingsStore.pageTitle.useTickEmoji ? '✔' : this.$t('ready').toLowerCase()
       }
@@ -211,13 +184,13 @@ export default {
       return this.timeString
     },
 
-    pageTitle () {
+    pageTitle() {
       return this.scheduleStore.getCurrentItem
         ? this.$t('section.' + this.scheduleStore.getCurrentItem.type).toLowerCase()
         : 'Pomodoro'
     },
 
-    progressBarSchedules () {
+    progressBarSchedules() {
       const numSchedules = this.settingsStore.performance.showProgressBar ? 2 : 1
       return this.scheduleStore.getSchedule.slice(0, numSchedules)
     },

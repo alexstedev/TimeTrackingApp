@@ -1,17 +1,12 @@
 <template>
   <section class="fixed z-40 w-full h-full p-0 md:p-4 md:max-w-screen-sm">
-    <div class="flex flex-col h-full overflow-hidden bg-white rounded-none shadow-lg md:rounded-lg dark:bg-gray-900 dark:text-gray-50" :style="{ 'padding-top': `${mobileSettingsStore.padding.top}px`, 'padding-bottom': `${mobileSettingsStore.padding.bottom}px` }">
+    <div
+      class="flex flex-col h-full overflow-hidden bg-white rounded-none shadow-lg md:rounded-lg dark:bg-gray-900 dark:text-gray-50"
+      :style="{ 'padding-top': `${mobileSettingsStore.padding.top}px`, 'padding-bottom': `${mobileSettingsStore.padding.bottom}px` }">
       <h1 class="px-4 mt-4 mb-2 text-xl font-bold uppercase">
         <span>{{ $t('settings.heading') }}</span>
-        <Button
-          :aria-label="$t('settings.buttons.close')"
-          default-style
-          circle
-          :importance="3"
-          class="float-right -mt-2 -mr-2"
-          tabindex="0"
-          @click="processedValue = false"
-        >
+        <Button :aria-label="$t('settings.buttons.close')" default-style circle :importance="3"
+          class="float-right -mt-2 -mr-2" tabindex="0" @click="processedValue = false">
           <CloseIcon :aria-label="$t('settings.buttons.close')" />
         </Button>
       </h1>
@@ -19,12 +14,9 @@
         <Transition tag="div" name="tab-transition" mode="out-in" class="relative w-full">
           <!-- Core settings -->
           <div v-if="activeTab === 1" :key="1" class="settings-tab">
-            <OptionGroup
-              :choices="$languages"
-              :value="settingsStore.lang"
+            <OptionGroup :choices="$languages" :value="settingsStore.lang"
               :override-text="{ title: $languages, description: null }"
-              @input="(newLang) => { settingsStore.lang = newLang }"
-            />
+              @input="(newLang) => { settingsStore.lang = newLang }" />
             <Divider />
             <SettingsItem type="check" :path="['adaptiveTicking', 'enabled']" />
             <SettingsItem v-if="isWeb" type="check" :path="['timerControls', 'enableKeyboardShortcuts']" />
@@ -32,16 +24,12 @@
             <template v-if="isWeb">
               <Divider />
               <SettingsItem type="check" :path="['permissions', 'audio']" />
-              <SettingsItem
-                type="check"
-                :path="['permissions', 'notifications']"
-                :disabled="notificationsEnabled === false"
-                @input="(newValue) => {
+              <SettingsItem type="check" :path="['permissions', 'notifications']"
+                :disabled="notificationsEnabled === false" @input="(newValue) => {
                   if (newValue === true) {
                     eventsStore.recordEvent('permission.notification')
                   }
-                }"
-              />
+                }" />
             </template>
 
             <template v-if="isMobile">
@@ -53,14 +41,10 @@
             <Divider />
 
             <SettingsItem type="check" :path="['tasks', 'enabled']" />
-            <SettingsItem
-              type="number"
-              :path="['tasks', 'maxActiveTasks']"
-              :min="1"
-              :max="15"
-              :disabled="!settingsStore.tasks.enabled"
-            />
-            <SettingsItem type="check" :path="['tasks', 'removeCompletedTasks']" :disabled="!settingsStore.tasks.enabled" />
+            <SettingsItem type="number" :path="['tasks', 'maxActiveTasks']" :min="1" :max="15"
+              :disabled="!settingsStore.tasks.enabled" />
+            <SettingsItem type="check" :path="['tasks', 'removeCompletedTasks']"
+              :disabled="!settingsStore.tasks.enabled" />
 
             <template v-if="isWeb">
               <Divider />
@@ -80,21 +64,16 @@
             <SettingsItem type="number" :path="['schedule', 'longPauseInterval']" :min="1" :max="10" />
             <Divider />
 
-            <SettingsItem
-              type="empty"
-              :path="['schedule', 'lengths']"
-            >
-              <OptionGroup
-                translation-key="timerpreset"
-                :choices="timerPresets"
+            <SettingsItem type="empty" :path="['schedule', 'lengths']">
+              <OptionGroup translation-key="timerpreset" :choices="timerPresets"
                 :value="settingsStore.getActiveSchedulePreset"
-                @input="(newPreset) => settingsStore.applyPreset(newPreset)"
-              />
+                @input="(newPreset) => settingsStore.applyPreset(newPreset)" />
             </SettingsItem>
             <SettingsItem type="time" :path="['schedule', 'lengths', 'work']" :min-ms="5000" />
             <SettingsItem type="time" :path="['schedule', 'lengths', 'shortpause']" :min-ms="5000" />
             <SettingsItem type="time" :path="['schedule', 'lengths', 'longpause']" :min-ms="5000" />
-            <div class="flex flex-row items-center px-3 py-4 space-x-2 rounded-lg ring-inset ring ring-primary bg-primary/20 dark:bg-gray-700 dark:text-gray-100">
+            <div
+              class="flex flex-row items-center px-3 py-4 space-x-2 rounded-lg ring-inset ring ring-primary bg-primary/20 dark:bg-gray-700 dark:text-gray-100">
               <InfoIcon />
               <span v-text="$t('settings.scheduleMinTime')" />
             </div>
@@ -104,27 +83,20 @@
           <div v-else-if="activeTab === 3" :key="3" class="settings-tab">
             <SettingsItem type="check" :path="['visuals', 'darkMode']" />
             <Divider />
-            <SettingsItem type="option" :path="['currentTimer']" :choices="{traditional: 'traditional', approximate: 'approximate', percentage: 'percentage'}" />
+            <SettingsItem type="option" :path="['currentTimer']"
+              :choices="{traditional: 'traditional', approximate: 'approximate', percentage: 'percentage'}" />
             <Divider />
             <SettingsItem type="check" :path="['schedule', 'visibility', 'enabled']" />
-            <SettingsItem type="check" :path="['schedule', 'visibility', 'showSectionType']" :disabled="!settingsStore.schedule.visibility.enabled" />
-            <SettingsItem
-              type="number"
-              :path="['schedule', 'numScheduleEntries']"
-              :min="3"
-              :max="10"
-              :disabled="!settingsStore.schedule.visibility.enabled"
-            />
+            <SettingsItem type="check" :path="['schedule', 'visibility', 'showSectionType']"
+              :disabled="!settingsStore.schedule.visibility.enabled" />
+            <SettingsItem type="number" :path="['schedule', 'numScheduleEntries']" :min="3" :max="10"
+              :disabled="!settingsStore.schedule.visibility.enabled" />
             <Divider />
             <SettingsItem type="check" :path="['performance', 'showProgressBar']" />
             <SettingsItem v-if="isWeb" type="check" :path="['pageTitle', 'useTickEmoji']" />
             <!-- TODO Audio volume control -->
           </div>
 
-          <!-- About page -->
-          <div v-else-if="activeTab === 4" :key="4" class="settings-tab">
-            <AboutTab />
-          </div>
         </Transition>
       </div>
 
@@ -145,11 +117,6 @@
             <TabIconVisuals role="presentation" />
           </template>
         </TabHeader>
-        <TabHeader :active="activeTab === 4" :text="$t('settings.tabs.about')" @click="activeTab = 4">
-          <template #icon>
-            <TabIconAbout role="presentation" />
-          </template>
-        </TabHeader>
       </div>
     </div>
   </section>
@@ -163,8 +130,6 @@ import OptionGroup from '@/components/base/optionGroup.vue'
 import TabHeader from '@/components/settings/panel/tabHeader.vue'
 import ExportButton from '@/components/settings/exportButton.vue'
 import ImportButton from '@/components/settings/importButton.vue'
-
-import AboutTab from '~~/components/settings/aboutTab.vue'
 
 import presetTimers from '@/assets/settings/timerPresets'
 import { useSettings } from '~~/stores/settings'
@@ -193,9 +158,7 @@ export default {
     TabIconGeneral: AdjustmentsIcon,
     TabIconSchedule: AlarmIcon,
     TabIconVisuals: ArtboardIcon,
-    TabIconAbout: InfoCircleIcon,
     InfoIcon: InfoCircleIcon,
-    AboutTab
   },
   props: {
     modelValue: {
@@ -204,7 +167,7 @@ export default {
     }
   },
 
-  setup () {
+  setup() {
     const runtimeConfig = useRuntimeConfig()
     return {
       runtimeConfig,
@@ -214,7 +177,7 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       activeTab: 1,
       resetConfirm: false,
@@ -230,8 +193,8 @@ export default {
     }),
 
     processedValue: {
-      get () { return this.modelValue },
-      set (newValue) { this.$emit('update:modelValue', newValue) }
+      get() { return this.modelValue },
+      set(newValue) { this.$emit('update:modelValue', newValue) }
     },
 
     notificationPermission: () => {
@@ -244,7 +207,7 @@ export default {
       updateNotificationsEnabled: 'updateEnabled'
     }),
 
-    changeNotificationSettings (newValue) {
+    changeNotificationSettings(newValue) {
       this.notificationPermission = newValue
     }
   }
