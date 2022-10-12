@@ -63,15 +63,6 @@
 
       <template #after>
         <div class="flex flex-col items-center justify-end flex-grow mb-8 xl:absolute xl:bottom-4">
-          <!-- Source code, support and social buttons -->
-          <div class="flex flex-row mb-4 space-x-2">
-            <SupportButton :aria-label="$t('index.alt.links.source')" icon-size="28" type="github" :show-text="false"
-              :default-colours="false" class="p-2 text-gray-100 bg-black hover:bg-gray-800 active:bg-gray-900"
-              utm-tags="?utm_source=TimeTrackingApp&utm_medium=web&utm_content=home" tabindex="0" />
-            <SupportButton :aria-label="$t('index.alt.links.support')" icon-size="28" type="support" :show-text="false"
-              :default-colours="false" class="p-2 text-gray-100 bg-black hover:bg-gray-800 active:bg-gray-900"
-              utm-tags="?utm_source=TimeTrackingApp&utm_medium=web&utm_content=home" tabindex="0" />
-          </div>
           <!-- Scroll indicator -->
           <ScrollIcon size="42" />
         </div>
